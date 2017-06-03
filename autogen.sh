@@ -19,5 +19,9 @@ autoconf
 
 cd "$olddir"
 
-echo "Now you are ready to run ./configure."
-echo "You can also run  ./configure --help for extra features to enable/disable."
+if [ "$NOCONFIGURE" = "" ]; then
+	$srcdir/configure "$@" || exit 1
+else
+	echo "Now you are ready to run ./configure."
+	echo "You can also run  ./configure --help for extra features to enable/disable."
+fi
