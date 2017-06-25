@@ -355,7 +355,12 @@ void DOS_Shell::Run(void) {
 			else
 			{
 				char filename[256];
+
+#if defined(LINUX) || defined(BSD)
+				filename = getwcd(filename, sizeof(filename));
+#else
 				GetCurrentDirectory(256,filename);
+#endif
 
 				sprintf(input_line,"mount %c %s",filename[0],filename);
 				ParseLine(input_line);	
